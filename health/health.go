@@ -20,10 +20,11 @@ type Checker interface {
 func Handler(checkers map[string]Checker) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+
 		components, healthy := CheckHealth(checkers)
 		if !healthy {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(components)
+			_ = json.NewEncoder(w).Encode(components)
 		} else {
 			w.WriteHeader(http.StatusOK)
 		}
@@ -34,12 +35,14 @@ func Handler(checkers map[string]Checker) http.HandlerFunc {
 func CheckHealth(checkers map[string]Checker) (map[string]error, bool) {
 	components := make(map[string]error, len(checkers))
 	healthy := true
+
 	for name, hc := range checkers {
 		if err := hc.HealthCheck(); err != nil {
 			healthy = false
 			components[name] = err
 		}
 	}
+
 	return components, healthy
 }
 

@@ -25,6 +25,7 @@ func (wp *WriterPool) Get() (buf *bytes.Buffer, w *bufio.Writer) {
 		buf = bytes.NewBuffer([]byte{})
 		w = bufio.NewWriter(buf)
 	}
+
 	return
 }
 

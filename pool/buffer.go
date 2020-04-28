@@ -23,6 +23,7 @@ func (bp *BufferPool) Get() (b *bytes.Buffer) {
 	default:
 		b = bytes.NewBuffer([]byte{})
 	}
+
 	return
 }
 

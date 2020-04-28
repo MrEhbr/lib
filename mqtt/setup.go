@@ -116,7 +116,6 @@ func setupTLS(caPath, certPath, keyPath string) (*tls.Config, error) {
 		}
 
 		tlsCfg.Certificates = []tls.Certificate{cert}
-		tlsCfg.BuildNameToCertificate()
 	}
 
 	return tlsCfg, nil

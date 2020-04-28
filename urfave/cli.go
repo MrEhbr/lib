@@ -21,6 +21,7 @@ func ChainBeforeFunc(before ...cli.BeforeFunc) cli.BeforeFunc {
 				return err
 			}
 		}
+
 		return nil
 	}
 }
